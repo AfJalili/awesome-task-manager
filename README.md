@@ -1,26 +1,4 @@
-<p align="center">
-  <a href="https://nestjs.com/" target="blank"><img src="https://github.com/nestjs/docs.nestjs.com/blob/master/src/assets/logo-small.svg" height="100" alt="Nest logo" /></a>
-  <a href="https://typeorm.io/" target="blank"><img src="https://avatars.githubusercontent.com/u/20165699" height="100" alt="TypeORM logo" /></a>
-  <a href="https://www.postgresql.org/" target="blank"><img src="https://www.postgresql.org/media/img/about/press/elephant.png" height="100" alt="PostgreSQL logo" /></a>
-  <a href="https://jestjs.io/" target="blank"><img src="https://github.com/facebook/jest/blob/main/website/static/img/jest.png" height="100" alt="Jest logo" /></a>
-  <a href="https://prettier.io/" target="blank"><img src="https://github.com/prettier/prettier/blob/main/website/static/icon.png" height="100" alt="Prettier logo" /></a>
-  <a href="https://eslint.org/" target="blank"><img src="https://github.com/eslint/website/blob/master/assets/img/logo.svg" height="100" alt="ESLint logo" /></a>
-</p>
-
-<p align="center">
-  <a href="https://docs.docker.com/" target="blank"><img src="https://www.docker.com/wp-content/uploads/2022/03/Moby-logo.png" height="60" alt="Docker logo" /></a>
-  <a href="https://github.com/features/actions" target="blank"><img src="https://avatars.githubusercontent.com/u/44036562" height="60" alt="GitHub Actions logo" /></a>
-  <a href="https://circleci.com/" target="blank"><img src="https://www.vectorlogo.zone/logos/circleci/circleci-icon.svg" height="60" alt="CircleCI logo" /></a>
-</p>
-
-# Nest - Boilerplate
-
-[![GitHub CI](https://github.com/smarlhens/nest-boilerplate/workflows/CI/badge.svg)](https://github.com/smarlhens/nest-boilerplate/actions?query=workflow%3ACI)
-[![CircleCI](https://circleci.com/gh/smarlhens/nest-boilerplate.svg?style=svg)](https://circleci.com/gh/smarlhens/nest-boilerplate)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
-[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://github.com/prettier/prettier)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
-
+# Awesome Task Manger
 ## Table of contents
 
 - [Getting Started](#getting-started)
@@ -64,13 +42,13 @@ What things you need to install the software and how to install them :
 1. Clone the git repository
 
    ```bash
-   git clone https://github.com/smarlhens/nest-boilerplate.git
+   git clone https://github.com/AfshinJalili/awesome-task-manager.git
    ```
 
 1. Go into the project directory
 
    ```bash
-   cd nest-boilerplate/
+   cd awesome-task-manager/
    ```
 
 1. Checkout working branch
