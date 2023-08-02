@@ -1,5 +1,31 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "src"
+  "sourceRoot": "apps/nashville/src",
+  "monorepo": true,
+  "root": "apps/nashville",
+  "compilerOptions": {
+    "webpack": true,
+    "tsConfigPath": "apps/nashville/tsconfig.app.json"
+  },
+  "projects": {
+    "nashville": {
+      "type": "application",
+      "root": "apps/nashville",
+      "entryFile": "main",
+      "sourceRoot": "apps/nashville/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/nashville/tsconfig.app.json"
+      }
+    },
+    "gallatin": {
+      "type": "application",
+      "root": "apps/gallatin",
+      "entryFile": "main",
+      "sourceRoot": "apps/gallatin/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/gallatin/tsconfig.app.json"
+      }
+    }
+  }
 }
