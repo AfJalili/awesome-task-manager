@@ -1,7 +1,8 @@
-import {Body, Controller, Delete, Get, Param, Patch, Post} from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Patch, Post, Query} from '@nestjs/common';
 import {TasksService} from './tasks.service';
 import {CreateTaskDto} from './dto/create-task.dto';
 import {UpdateTaskDto} from './dto/update-task.dto';
+import {PaginationDto} from "./dto/pagination.dto";
 
 @Controller('tasks')
 export class TasksController {
@@ -14,12 +15,14 @@ export class TasksController {
     }
 
     @Get()
-    findAll() {
+    findAll(@Query() paginationDto: PaginationDto) {
+        console.log(paginationDto)
         return this.tasksService.findAll();
     }
 
     @Get(':id')
     findOne(@Param('id') id: string) {
+        console.log('id: ', id)
         return this.tasksService.findOne(+id);
     }
 
