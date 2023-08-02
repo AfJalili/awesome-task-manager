@@ -154,7 +154,7 @@ For more configuration options and details, see the [configuration docs](https:/
 
 [Husky](https://github.com/typicode/husky) is a package that helps you create Git hooks easily.
 
-**Configuration folder**: [`.husky`](./.husky/).
+**Configuration folder**: [`.husky`](/.husky).
 
 ---
 
