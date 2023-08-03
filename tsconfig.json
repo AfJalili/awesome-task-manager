@@ -10,7 +10,14 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
-    "paths": {}
+    "paths": {
+      "@gallatin/interfaces": [
+        "libs/interfaces/src"
+      ],
+      "@gallatin/interfaces/*": [
+        "libs/interfaces/src/*"
+      ]
+    }
   },
   "exclude": [
     "node_modules",

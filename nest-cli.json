@@ -30,6 +30,15 @@
         "watchAssets": true,
         "tsConfigPath": "apps/gallatin/tsconfig.app.json"
       }
+    },
+    "interfaces": {
+      "type": "library",
+      "root": "libs/interfaces",
+      "entryFile": "index",
+      "sourceRoot": "libs/interfaces/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/interfaces/tsconfig.lib.json"
+      }
     }
   }
 }

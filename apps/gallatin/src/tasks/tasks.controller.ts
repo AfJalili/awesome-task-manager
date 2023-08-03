@@ -1,5 +1,6 @@
 import { Controller } from '@nestjs/common';
 import { TasksService } from './tasks.service';
+import { GrpcMethod } from '@nestjs/microservices';
 import {
   CreateTaskRequest,
   DeleteTaskRequest,
@@ -8,8 +9,7 @@ import {
   ReadTaskRequest,
   Task,
   UpdateTaskRequest,
-} from '../proto/tasks';
-import { GrpcMethod } from '@nestjs/microservices';
+} from '@gallatin/interfaces/grpc/tasks';
 
 @Controller()
 export class TasksController {
