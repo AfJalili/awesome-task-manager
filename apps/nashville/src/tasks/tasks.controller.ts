@@ -16,14 +16,14 @@ export class TasksController {
     @ApiOperation({summary: 'Create a new task'})
     @ApiBody({type: CreateTaskDto})
     @ApiResponse({status: 201, description: 'The task has been successfully created.', type: Task})
-    create(@Body() createTaskDto: CreateTaskDto) {
+    create(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
         return this.tasksService.create(createTaskDto);
     }
 
     @Get()
     @ApiOperation({summary: 'Retrieve all tasks by pagination'})
     @ApiResponse({status: 200, description: 'Returned all tasks by pagination.', type: [Task]})
-    findAll(@Query() paginationDto: PaginationDto) {
+    findAll(@Query() paginationDto: PaginationDto): Promise<Task[]> {
         return this.tasksService.findAll();
     }
 
@@ -31,7 +31,7 @@ export class TasksController {
     @ApiOperation({summary: 'Retrieve a task by id'})
     @ApiParam({name: 'id', type: String})
     @ApiResponse({status: 200, description: 'Returned the task.', type: Task})
-    findOne(@Param('id') id: string) {
+    findOne(@Param('id') id: string): Promise<Task> {
         return this.tasksService.findOne(+id);
     }
 
@@ -40,7 +40,7 @@ export class TasksController {
     @ApiParam({name: 'id', type: String})
     @ApiBody({type: UpdateTaskDto})
     @ApiResponse({status: 200, description: 'The task has been successfully updated.', type: Task})
-    update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto) {
+    update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto): Promise<Task> {
         return this.tasksService.update(+id, updateTaskDto);
     }
 
@@ -48,7 +48,7 @@ export class TasksController {
     @ApiOperation({summary: 'Delete a task by id'})
     @ApiParam({name: 'id', type: String})
     @ApiResponse({status: 204, description: 'The task has been successfully deleted.'})
-    remove(@Param('id') id: string) {
-        return this.tasksService.remove(+id);
+    remove(@Param('id') id: string): void {
+        this.tasksService.remove(+id);
     }
 }
