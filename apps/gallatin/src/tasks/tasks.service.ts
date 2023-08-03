@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
+import { Task } from './entities/task.entity';
 import {
   CreateTaskRequest,
   DeleteTaskRequest,
   ListTasksRequest,
   ReadTaskRequest,
   UpdateTaskRequest,
-} from '../proto/tasks';
-import { Task } from './entities/task.entity';
+} from '@gallatin/interfaces/grpc';
 
 @Injectable()
 export class TasksService {
