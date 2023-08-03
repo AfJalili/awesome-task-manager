@@ -1,1 +1,1 @@
-export * from 'tasks.ts';
+export * from './tasks';
