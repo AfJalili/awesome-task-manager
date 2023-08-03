@@ -1,26 +1,32 @@
-import {Injectable} from '@nestjs/common';
-import {CreateTaskDto} from './dto/create-task.dto';
-import {UpdateTaskDto} from './dto/update-task.dto';
+import { Injectable } from '@nestjs/common';
+import {
+  CreateTaskRequest,
+  DeleteTaskRequest,
+  ListTasksRequest,
+  ReadTaskRequest,
+  UpdateTaskRequest,
+} from '../proto/tasks';
+import { Task } from './entities/task.entity';
 
 @Injectable()
 export class TasksService {
-  create(createTaskDto: CreateTaskDto) {
-    return 'This action adds a new task';
+  createTask(request: CreateTaskRequest): Promise<Task> {
+    return undefined;
   }
 
-  findAll() {
-    return `This action returns all tasks`;
+  listTasks(request: ListTasksRequest): Promise<Task[]> {
+    return undefined;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} task`;
+  readTask(request: ReadTaskRequest): Promise<Task> {
+    return undefined;
   }
 
-  update(id: number, updateTaskDto: UpdateTaskDto) {
-    return `This action updates a #${id} task`;
+  updateTask(request: UpdateTaskRequest): Promise<Task> {
+    return undefined;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} task`;
+  deleteTask(request: DeleteTaskRequest): Promise<Task> {
+    return undefined;
   }
 }
