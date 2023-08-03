@@ -1,0 +1,50 @@
+syntax = "proto3";
+
+package gallatin;
+
+service TasksService {
+    rpc CreateTask (CreateTaskRequest) returns (Task) {}
+    rpc ReadTask (ReadTaskRequest) returns (Task) {}
+    rpc UpdateTask (UpdateTaskRequest) returns (Task) {}
+    rpc DeleteTask (DeleteTaskRequest) returns (Task) {}
+    rpc ListTasks (ListTasksRequest) returns (ListTasksResponse) {}
+}
+
+message CreateTaskRequest {
+    optional string parentId = 2;
+    string title = 3;
+    string description = 4;
+}
+
+message ReadTaskRequest {
+    string id = 1;
+}
+
+message UpdateTaskRequest {
+    string id = 1;
+    optional string parentId = 2;
+    optional string title = 3;
+    optional string description = 4;
+}
+
+message DeleteTaskRequest {
+    string id = 1;
+}
+
+message ListTasksRequest {
+    int32 page = 1;
+    int32 limit = 2;
+}
+
+message ListTasksResponse {
+    repeated Task tasks = 1;
+}
+
+message Task {
+    string id = 1;
+    optional string parentId = 2;
+    string title = 3;
+    string description = 4;
+    string createdAt = 5;
+    string updatedAt = 6;
+}
