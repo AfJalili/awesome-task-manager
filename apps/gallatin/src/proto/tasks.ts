@@ -1,8 +1,8 @@
 /* eslint-disable */
-import {GrpcMethod, GrpcStreamMethod} from "@nestjs/microservices";
-import {Observable} from "rxjs";
+import { GrpcMethod, GrpcStreamMethod } from '@nestjs/microservices';
+import { Observable } from 'rxjs';
 
-export const protobufPackage = "tasks";
+export const protobufPackage = 'task';
 
 export interface CreateTaskRequest {
   parentId?: string | undefined;
@@ -43,10 +43,9 @@ export interface Task {
   updatedAt: string;
 }
 
-export interface Empty {
-}
+export interface Empty {}
 
-export const TASKS_PACKAGE_NAME = "tasks";
+export const TASK_PACKAGE_NAME = 'task';
 
 export interface TasksServiceClient {
   createTask(request: CreateTaskRequest): Observable<Task>;
@@ -74,17 +73,17 @@ export interface TasksServiceController {
 
 export function TasksServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = ["createTask", "readTask", "updateTask", "deleteTask", "listTasks"];
+    const grpcMethods: string[] = ['createTask', 'readTask', 'updateTask', 'deleteTask', 'listTasks'];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
-      GrpcMethod("TasksService", method)(constructor.prototype[method], method, descriptor);
+      GrpcMethod('TasksService', method)(constructor.prototype[method], method, descriptor);
     }
     const grpcStreamMethods: string[] = [];
     for (const method of grpcStreamMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
-      GrpcStreamMethod("TasksService", method)(constructor.prototype[method], method, descriptor);
+      GrpcStreamMethod('TasksService', method)(constructor.prototype[method], method, descriptor);
     }
   };
 }
 
-export const TASKS_SERVICE_NAME = "TasksService";
+export const TASKS_SERVICE_NAME = 'TasksService';

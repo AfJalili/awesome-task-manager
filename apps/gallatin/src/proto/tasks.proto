@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package tasks;
+package task;
 
 service TasksService {
     rpc CreateTask (CreateTaskRequest) returns (Task) {}
