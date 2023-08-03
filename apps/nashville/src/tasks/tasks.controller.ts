@@ -24,7 +24,6 @@ export class TasksController {
     @ApiOperation({summary: 'Retrieve all tasks by pagination'})
     @ApiResponse({status: 200, description: 'Returned all tasks by pagination.', type: [Task]})
     findAll(@Query() paginationDto: PaginationDto) {
-        console.log(paginationDto)
         return this.tasksService.findAll();
     }
 
@@ -33,7 +32,6 @@ export class TasksController {
     @ApiParam({name: 'id', type: String})
     @ApiResponse({status: 200, description: 'Returned the task.', type: Task})
     findOne(@Param('id') id: string) {
-        console.log('id: ', id)
         return this.tasksService.findOne(+id);
     }
 
