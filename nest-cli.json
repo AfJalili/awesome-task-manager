@@ -24,6 +24,10 @@
       "entryFile": "main",
       "sourceRoot": "apps/gallatin/src",
       "compilerOptions": {
+        "assets": [
+          "**/*.proto"
+        ],
+        "watchAssets": true,
         "tsConfigPath": "apps/gallatin/tsconfig.app.json"
       }
     }
