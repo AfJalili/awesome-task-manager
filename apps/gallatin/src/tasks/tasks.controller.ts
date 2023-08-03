@@ -1,36 +1,42 @@
-import {Controller} from '@nestjs/common';
-import {MessagePattern, Payload} from '@nestjs/microservices';
-import {TasksService} from './tasks.service';
-import {CreateTaskDto} from './dto/create-task.dto';
-import {UpdateTaskDto} from './dto/update-task.dto';
+import { Controller } from '@nestjs/common';
+import { TasksService } from './tasks.service';
+import {
+  CreateTaskRequest,
+  DeleteTaskRequest,
+  ListTasksRequest,
+  ListTasksResponse,
+  ReadTaskRequest,
+  Task,
+  UpdateTaskRequest,
+} from '../proto/tasks';
+import { GrpcMethod } from '@nestjs/microservices';
 
 @Controller()
 export class TasksController {
-  constructor(private readonly tasksService: TasksService) {
+  constructor(private readonly tasksService: TasksService) {}
+
+  @GrpcMethod()
+  createTask(request: CreateTaskRequest): Task {
+    return undefined;
   }
 
-  @MessagePattern('createTask')
-  create(@Payload() createTaskDto: CreateTaskDto) {
-    return this.tasksService.create(createTaskDto);
+  @GrpcMethod()
+  deleteTask(request: DeleteTaskRequest): Task {
+    return undefined;
   }
 
-  @MessagePattern('findAllTasks')
-  findAll() {
-    return this.tasksService.findAll();
+  @GrpcMethod()
+  listTasks(request: ListTasksRequest): ListTasksResponse {
+    return undefined;
   }
 
-  @MessagePattern('findOneTask')
-  findOne(@Payload() id: number) {
-    return this.tasksService.findOne(id);
+  @GrpcMethod()
+  readTask(request: ReadTaskRequest): Task {
+    return undefined;
   }
 
-  @MessagePattern('updateTask')
-  update(@Payload() updateTaskDto: UpdateTaskDto) {
-    return this.tasksService.update(updateTaskDto.id, updateTaskDto);
-  }
-
-  @MessagePattern('removeTask')
-  remove(@Payload() id: number) {
-    return this.tasksService.remove(id);
+  @GrpcMethod()
+  updateTask(request: UpdateTaskRequest): Task {
+    return undefined;
   }
 }
