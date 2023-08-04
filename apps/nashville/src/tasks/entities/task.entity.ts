@@ -1,10 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class Task {
-  @ApiProperty({ description: 'The unique identifier of the task.' })
+  @ApiProperty({ description: 'The uuid of the task.' })
   id: string;
 
-  @ApiProperty({ description: 'The unique identifier of the parent task.', required: false })
+  @ApiProperty({ description: 'The uuid of the parent task.', required: false })
   parentId?: string | null = null;
 
   @ApiProperty({ description: 'The title of the task.' })
