@@ -1,5 +1,4 @@
 /* eslint-disable */
-import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
 import { Observable } from "rxjs";
 
 export const protobufPackage = 'task';
@@ -69,21 +68,6 @@ export interface TasksServiceController {
   deleteTask(request: DeleteTaskRequest): Promise<Task> | Observable<Task> | Task;
 
   listTasks(request: ListTasksRequest): Promise<ListTasksResponse> | Observable<ListTasksResponse> | ListTasksResponse;
-}
-
-export function TasksServiceControllerMethods() {
-  return function (constructor: Function) {
-    const grpcMethods: string[] = ['createTask', 'readTask', 'updateTask', 'deleteTask', 'listTasks'];
-    for (const method of grpcMethods) {
-      const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
-      GrpcMethod('TasksService', method)(constructor.prototype[method], method, descriptor);
-    }
-    const grpcStreamMethods: string[] = [];
-    for (const method of grpcStreamMethods) {
-      const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
-      GrpcStreamMethod('TasksService', method)(constructor.prototype[method], method, descriptor);
-    }
-  };
 }
 
 export const TASKS_SERVICE_NAME = 'TasksService';
