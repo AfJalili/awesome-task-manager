@@ -8,35 +8,62 @@ import {
   ListTasksResponse,
   ReadTaskRequest,
   Task,
+  TASKS_SERVICE_NAME,
   UpdateTaskRequest,
 } from '@gallatin/interfaces/grpc/tasks';
+
+const tasks: Task[] = [
+  {
+    id: '1',
+    parentId: '2',
+    title: 'test code',
+    description: 'write tests',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+  {
+    id: '2',
+    parentId: null,
+    title: 'test code',
+    description: 'write tests',
+    createdAt: new Date(),
+    updatedAt: new Date(),
+  },
+];
 
 @Controller()
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
-  @GrpcMethod()
-  createTask(request: CreateTaskRequest): Task {
-    return undefined;
+  @GrpcMethod(TASKS_SERVICE_NAME)
+  async createTask(request: CreateTaskRequest): Promise<Task> {
+    try {
+      const task = await this.tasksService.createTask(request);
+      console.log(task);
+      return task;
+    } catch (error) {
+      console.log(error.message);
+      return null;
+    }
   }
 
-  @GrpcMethod()
-  deleteTask(request: DeleteTaskRequest): Task {
-    return undefined;
+  @GrpcMethod(TASKS_SERVICE_NAME)
+  async readTask(request: ReadTaskRequest): Promise<Task> {
+    return await this.tasksService.readTask(request);
   }
 
-  @GrpcMethod()
-  listTasks(request: ListTasksRequest): ListTasksResponse {
-    return undefined;
+  @GrpcMethod(TASKS_SERVICE_NAME)
+  async listTasks(request: ListTasksRequest): Promise<ListTasksResponse> {
+    return { tasks: await this.tasksService.listTasks(request) };
   }
 
-  @GrpcMethod()
-  readTask(request: ReadTaskRequest): Task {
-    return undefined;
+  @GrpcMethod(TASKS_SERVICE_NAME)
+  async updateTask(request: UpdateTaskRequest): Promise<Task> {
+    return await this.tasksService.updateTask(request);
   }
 
-  @GrpcMethod()
-  updateTask(request: UpdateTaskRequest): Task {
-    return undefined;
+  @GrpcMethod(TASKS_SERVICE_NAME)
+  async deleteTask(request: DeleteTaskRequest): Promise<Task> {
+    return await this.tasksService.deleteTask(request);
   }
 }

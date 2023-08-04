@@ -7,26 +7,40 @@ import {
   ReadTaskRequest,
   UpdateTaskRequest,
 } from '@gallatin/interfaces/grpc';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class TasksService {
-  createTask(request: CreateTaskRequest): Promise<Task> {
-    return undefined;
+  constructor(
+    @InjectRepository(Task)
+    private taskRepo: Repository<Task>
+  ) {}
+
+  async createTask(request: CreateTaskRequest): Promise<Task> {
+    const task = this.taskRepo.create(request);
+    return this.taskRepo.insert(task).then(() => task);
   }
 
   listTasks(request: ListTasksRequest): Promise<Task[]> {
-    return undefined;
+    return this.taskRepo.find({ take: request.limit, skip: (request.page - 1) * request.limit });
   }
 
   readTask(request: ReadTaskRequest): Promise<Task> {
-    return undefined;
+    return this.taskRepo.findOneBy(request);
   }
 
   updateTask(request: UpdateTaskRequest): Promise<Task> {
-    return undefined;
+    const task = this.taskRepo.create(request);
+    return this.taskRepo.update({ id: request.id }, task).then(() => task);
   }
 
-  deleteTask(request: DeleteTaskRequest): Promise<Task> {
-    return undefined;
+  async deleteTask(request: DeleteTaskRequest): Promise<Task> {
+    const task = this.readTask(request);
+    if (task) {
+      await this.taskRepo.delete({ id: request.id });
+      return await task;
+    }
+    return null;
   }
 }
