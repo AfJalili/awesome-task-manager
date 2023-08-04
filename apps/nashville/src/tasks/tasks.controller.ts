@@ -1,12 +1,25 @@
-import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  NotFoundException,
+  Param,
+  Patch,
+  Post,
+  Query,
+  UseInterceptors,
+} from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { PaginationDto } from './dto/pagination.dto';
 import { Task } from './entities/task.entity';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { GrpcToHttpInterceptor } from 'nestjs-grpc-exceptions';
 
 @ApiTags('tasks')
+@UseInterceptors(GrpcToHttpInterceptor)
 @Controller('tasks')
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
@@ -51,7 +64,7 @@ export class TasksController {
   @ApiOperation({ summary: 'Delete a task by id' })
   @ApiParam({ name: 'id', type: String })
   @ApiResponse({ status: 204, description: 'The task has been successfully deleted.' })
-  remove(@Param('id') id: string): void {
-    this.tasksService.remove(id);
+  async remove(@Param('id') id: string): Promise<void> {
+    return await this.tasksService.remove(id);
   }
 }

@@ -1,12 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Task } from './entities/task.entity';
-import {
-  CreateTaskRequest,
-  DeleteTaskRequest,
-  ListTasksRequest,
-  ReadTaskRequest,
-  UpdateTaskRequest,
-} from '@gallatin/interfaces/grpc';
+import { CreateTaskRequest, ListTasksRequest, UpdateTaskRequest } from '@gallatin/interfaces/grpc';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -26,21 +20,20 @@ export class TasksService {
     return this.taskRepo.find({ take: request.limit, skip: (request.page - 1) * request.limit });
   }
 
-  readTask(request: ReadTaskRequest): Promise<Task> {
-    return this.taskRepo.findOneBy(request);
+  readTask(id: string): Promise<Task> {
+    return this.taskRepo.findOneBy({ id });
   }
 
-  updateTask(request: UpdateTaskRequest): Promise<Task> {
+  async updateTask(request: UpdateTaskRequest): Promise<Task> {
     const task = this.taskRepo.create(request);
-    return this.taskRepo.update({ id: request.id }, task).then(() => task);
-  }
-
-  async deleteTask(request: DeleteTaskRequest): Promise<Task> {
-    const task = this.readTask(request);
-    if (task) {
-      await this.taskRepo.delete({ id: request.id });
-      return await task;
+    const updateResult = await this.taskRepo.update({ id: request.id }, task);
+    if (updateResult.affected) {
+      return this.readTask(request.id);
     }
     return null;
+  }
+
+  async deleteTask(id: string): Promise<void> {
+    await this.taskRepo.delete({ id });
   }
 }
