@@ -6,7 +6,11 @@
   "root": "apps/nashville",
   "compilerOptions": {
     "webpack": true,
-    "tsConfigPath": "apps/nashville/tsconfig.app.json"
+    "tsConfigPath": "apps/nashville/tsconfig.app.json",
+    "assets": [
+      "**/*.proto"
+    ],
+    "watchAssets": true
   },
   "projects": {
     "nashville": {
@@ -23,22 +27,16 @@
       "root": "apps/gallatin",
       "entryFile": "main",
       "sourceRoot": "apps/gallatin/src",
-      "compilerOptions": {
-        "assets": [
-          "**/*.proto"
-        ],
-        "watchAssets": true,
-        "tsConfigPath": "apps/gallatin/tsconfig.app.json"
-      }
-    },
-    "interfaces": {
-      "type": "library",
-      "root": "libs/interfaces",
-      "entryFile": "index",
-      "sourceRoot": "libs/interfaces/src",
-      "compilerOptions": {
-        "tsConfigPath": "libs/interfaces/tsconfig.lib.json"
-      }
+      "tsConfigPath": "apps/gallatin/tsconfig.app.json"
+    }
+  },
+  "interfaces": {
+    "type": "library",
+    "root": "libs/interfaces",
+    "entryFile": "index",
+    "sourceRoot": "libs/interfaces/src",
+    "compilerOptions": {
+      "tsConfigPath": "libs/interfaces/tsconfig.lib.json"
     }
   }
 }
