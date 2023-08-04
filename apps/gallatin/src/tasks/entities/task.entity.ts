@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import { AfterLoad, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 
 @Entity()
 export class Task {
@@ -15,8 +15,14 @@ export class Task {
   description: string;
 
   @CreateDateColumn()
-  createdAt: Date;
+  createdAt: Date | string;
 
   @UpdateDateColumn()
-  updatedAt: Date;
+  updatedAt: Date | string;
+
+  @AfterLoad()
+  convertDateToString() {
+    this.createdAt = this.createdAt.toString();
+    this.updatedAt = this.updatedAt.toString();
+  }
 }

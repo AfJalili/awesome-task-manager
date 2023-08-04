@@ -1,6 +1,6 @@
 /* eslint-disable */
-import { GrpcMethod, GrpcStreamMethod } from '@nestjs/microservices';
-import { Observable } from 'rxjs';
+import { GrpcMethod, GrpcStreamMethod } from "@nestjs/microservices";
+import { Observable } from "rxjs";
 
 export const protobufPackage = 'task';
 
@@ -39,8 +39,8 @@ export interface Task {
   parentId?: string | undefined;
   title: string;
   description: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date | string;
+  updatedAt: Date | string;
 }
 
 export interface Empty {}

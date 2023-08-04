@@ -12,25 +12,6 @@ import {
   UpdateTaskRequest,
 } from '@gallatin/interfaces/grpc/tasks';
 
-const tasks: Task[] = [
-  {
-    id: '1',
-    parentId: '2',
-    title: 'test code',
-    description: 'write tests',
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-  {
-    id: '2',
-    parentId: null,
-    title: 'test code',
-    description: 'write tests',
-    createdAt: new Date(),
-    updatedAt: new Date(),
-  },
-];
-
 @Controller()
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
