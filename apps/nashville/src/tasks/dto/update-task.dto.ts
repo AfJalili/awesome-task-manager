@@ -4,7 +4,11 @@ import { CreateTaskDto } from './create-task.dto';
 import { IsOptional, IsUUID } from 'class-validator';
 
 export class UpdateTaskDto extends PartialType(CreateTaskDto) {
-  @ApiProperty({ description: 'The uuid of the parent task.', required: false })
+  @ApiProperty({
+    type: 'string(uuid)',
+    description: 'The uuid of the parent task. Set to null for root task.',
+    required: false,
+  })
   @IsUUID(4)
   @IsOptional()
   parentId?: string | null = null;
