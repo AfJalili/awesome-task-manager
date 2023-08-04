@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, NotFoundException, Param, Patch, Post, Query } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
@@ -30,8 +30,12 @@ export class TasksController {
   @ApiOperation({ summary: 'Retrieve a task by id' })
   @ApiParam({ name: 'id', type: String })
   @ApiResponse({ status: 200, description: 'Returned the task.', type: Task })
-  findOne(@Param('id') id: string): Promise<Task> {
-    return this.tasksService.findOne(+id);
+  async findOne(@Param('id') id: string): Promise<Task> {
+    const task = await this.tasksService.findOne(id);
+    if (!task) {
+      throw new NotFoundException(`Task ${id} not found`);
+    }
+    return task;
   }
 
   @Patch(':id')
@@ -40,7 +44,7 @@ export class TasksController {
   @ApiBody({ type: UpdateTaskDto })
   @ApiResponse({ status: 200, description: 'The task has been successfully updated.', type: Task })
   update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto): Promise<Task> {
-    return this.tasksService.update(+id, updateTaskDto);
+    return this.tasksService.update(id, updateTaskDto);
   }
 
   @Delete(':id')
@@ -48,6 +52,6 @@ export class TasksController {
   @ApiParam({ name: 'id', type: String })
   @ApiResponse({ status: 204, description: 'The task has been successfully deleted.' })
   remove(@Param('id') id: string): void {
-    this.tasksService.remove(+id);
+    this.tasksService.remove(id);
   }
 }
