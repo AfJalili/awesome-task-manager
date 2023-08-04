@@ -53,7 +53,7 @@ export interface TasksServiceClient {
 
   updateTask(request: UpdateTaskRequest): Observable<Task>;
 
-  deleteTask(request: DeleteTaskRequest): Observable<Task>;
+  deleteTask(request: DeleteTaskRequest): Observable<Empty>;
 
   listTasks(request: ListTasksRequest): Observable<ListTasksResponse>;
 }
@@ -65,7 +65,7 @@ export interface TasksServiceController {
 
   updateTask(request: UpdateTaskRequest): Promise<Task> | Observable<Task> | Task;
 
-  deleteTask(request: DeleteTaskRequest): Promise<Task> | Observable<Task> | Task;
+  deleteTask(request: DeleteTaskRequest): Promise<Empty> | Observable<Empty> | Empty;
 
   listTasks(request: ListTasksRequest): Promise<ListTasksResponse> | Observable<ListTasksResponse> | ListTasksResponse;
 }

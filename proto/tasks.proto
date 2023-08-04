@@ -6,7 +6,7 @@ service TasksService {
   rpc CreateTask (CreateTaskRequest) returns (Task) {}
   rpc ReadTask (ReadTaskRequest) returns (Task) {}
   rpc UpdateTask (UpdateTaskRequest) returns (Task) {}
-  rpc DeleteTask (DeleteTaskRequest) returns (Task) {}
+  rpc DeleteTask (DeleteTaskRequest) returns (Empty) {}
   rpc ListTasks (ListTasksRequest) returns (ListTasksResponse) {}
 }
 
