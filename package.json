@@ -44,7 +44,8 @@
     "reflect-metadata": "0.1.13",
     "rimraf": "5.0.1",
     "rxjs": "7.8.1",
-    "typeorm": "0.3.17"
+    "typeorm": "0.3.17",
+    "uuid": "9.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "17.6.7",
@@ -56,6 +57,7 @@
     "@types/jest": "29.5.3",
     "@types/node": "20.4.5",
     "@types/supertest": "2.0.12",
+    "@types/uuid": "9.0.2",
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
     "commitizen": "4.3.0",
