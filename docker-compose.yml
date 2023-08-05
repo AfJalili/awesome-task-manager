@@ -1,40 +1,32 @@
-version: '3.8'
-
+version: '3'
 services:
-  postgres:
-    container_name: postgres_container
-    image: postgres:15.3-alpine3.18
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
-      POSTGRES_DB: ${POSTGRES_DB:-postgres}
-      PGDATA: /data/postgres
-    volumes:
-      - postgres:/data/postgres
+  nashville:
+    build: ./nashville
     ports:
-      - '${POSTGRES_PORT:-5432}:5432'
-    networks:
-      - postgres
-    restart: unless-stopped
-
-  pgadmin:
-    container_name: pgadmin_container
-    image: dpage/pgadmin4:7.5
-    environment:
-      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+      - 3000:3000
     volumes:
-      - pgadmin:/root/.pgadmin
-    ports:
-      - '${PGADMIN_PORT:-5050}:80'
-    networks:
+      - ./nashville:/app
+    environment:
+      - NODE_ENV=development
+    depends_on:
       - postgres
-    restart: unless-stopped
 
-networks:
-  postgres:
-    driver: bridge
+  gallatin:
+    build: ./gallatin
+    ports:
+      - 3001:3001
+    volumes:
+      - ./gallatin:/app
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - postgres
 
-volumes:
   postgres:
-  pgadmin:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: root
+    ports:
+      - 5432:5432
