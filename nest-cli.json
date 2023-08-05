@@ -8,7 +8,11 @@
     "webpack": true,
     "tsConfigPath": "apps/nashville/tsconfig.app.json",
     "assets": [
-      "**/*.proto"
+      "**/*.proto",
+      "**/config.yaml",
+      {
+        "include": "../../config/*.*"
+      }
     ],
     "watchAssets": true
   },
@@ -27,7 +31,9 @@
       "root": "apps/gallatin",
       "entryFile": "main",
       "sourceRoot": "apps/gallatin/src",
-      "tsConfigPath": "apps/gallatin/tsconfig.app.json"
+      "compilerOptions": {
+        "tsConfigPath": "apps/gallatin/tsconfig.app.json"
+      }
     }
   },
   "interfaces": {

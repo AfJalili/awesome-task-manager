@@ -11,7 +11,6 @@ async function bootstrap() {
       package: TASK_PACKAGE_NAME,
     },
   });
-
   await app.listen();
 }
 
