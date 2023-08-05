@@ -1,22 +1,22 @@
 version: '3'
 services:
   nashville:
-    build: ./nashville
+    build: ./apps/nashville
     ports:
-      - 3000:3000
+      - "3000:3000"
     volumes:
-      - ./nashville:/app
+      - ./apps/nashville:/app
     environment:
       - NODE_ENV=development
     depends_on:
-      - postgres
+      - gallatin
 
   gallatin:
-    build: ./gallatin
+    build: ./apps/gallatin
     ports:
-      - 3001:3001
+      - "3001:3001"
     volumes:
-      - ./gallatin:/app
+      - ./apps/gallatin:/app
     environment:
       - NODE_ENV=development
     depends_on:
@@ -29,4 +29,4 @@ services:
       POSTGRES_PASSWORD: root
       POSTGRES_DB: root
     ports:
-      - 5432:5432
+      - "5432:5432"
