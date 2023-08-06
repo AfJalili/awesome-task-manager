@@ -1,22 +1,18 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  NotFoundException,
-  Param,
-  Patch,
-  Post,
-  Query,
-  UseInterceptors,
-} from '@nestjs/common';
+import { Body, Controller, NotFoundException, Param, Query, UseInterceptors } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { PaginationDto } from './dto/pagination.dto';
 import { Task } from './entities/task.entity';
-import { ApiBody, ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiTags } from '@nestjs/swagger';
 import { GrpcToHttpInterceptor } from 'nestjs-grpc-exceptions';
+import {
+  ApiCreateTask,
+  ApiFindAllTasks,
+  ApiFindOneTask,
+  ApiRemoveTask,
+  ApiUpdateTask,
+} from './decorators/tasks-controller.api.decorators';
 
 @ApiTags('tasks')
 @UseInterceptors(GrpcToHttpInterceptor)
@@ -24,25 +20,17 @@ import { GrpcToHttpInterceptor } from 'nestjs-grpc-exceptions';
 export class TasksController {
   constructor(private readonly tasksService: TasksService) {}
 
-  @Post()
-  @ApiOperation({ summary: 'Create a new task' })
-  @ApiBody({ type: CreateTaskDto })
-  @ApiResponse({ status: 201, description: 'The task has been successfully created.', type: Task })
+  @ApiCreateTask()
   create(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
     return this.tasksService.create(createTaskDto);
   }
 
-  @Get()
-  @ApiOperation({ summary: 'Retrieve all tasks by pagination' })
-  @ApiResponse({ status: 200, description: 'Returned all tasks by pagination.', type: [Task] })
+  @ApiFindAllTasks()
   findAll(@Query() paginationDto: PaginationDto): Promise<Task[]> {
     return this.tasksService.findAll(paginationDto.page, paginationDto.limit);
   }
 
-  @Get(':id')
-  @ApiOperation({ summary: 'Retrieve a task by id' })
-  @ApiParam({ name: 'id', type: String })
-  @ApiResponse({ status: 200, description: 'Returned the task.', type: Task })
+  @ApiFindOneTask(':id')
   async findOne(@Param('id') id: string): Promise<Task> {
     const task = await this.tasksService.findOne(id);
     if (!task) {
@@ -51,19 +39,12 @@ export class TasksController {
     return task;
   }
 
-  @Patch(':id')
-  @ApiOperation({ summary: 'Update a task by id' })
-  @ApiParam({ name: 'id', type: String })
-  @ApiBody({ type: UpdateTaskDto })
-  @ApiResponse({ status: 200, description: 'The task has been successfully updated.', type: Task })
+  @ApiUpdateTask(':id')
   update(@Param('id') id: string, @Body() updateTaskDto: UpdateTaskDto): Promise<Task> {
     return this.tasksService.update(id, updateTaskDto);
   }
 
-  @Delete(':id')
-  @ApiOperation({ summary: 'Delete a task by id' })
-  @ApiParam({ name: 'id', type: String })
-  @ApiResponse({ status: 204, description: 'The task has been successfully deleted.' })
+  @ApiRemoveTask(':id')
   async remove(@Param('id') id: string): Promise<void> {
     return await this.tasksService.remove(id);
   }
