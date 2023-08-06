@@ -4,8 +4,8 @@ services:
     build: ./apps/nashville
     ports:
       - "3000:3000"
-    volumes:
-      - ./apps/nashville:/app
+    networks:
+      - awesome-task-manager
     environment:
       - NODE_ENV=development
     depends_on:
@@ -15,8 +15,8 @@ services:
     build: ./apps/gallatin
     ports:
       - "3001:3001"
-    volumes:
-      - ./apps/gallatin:/app
+    networks:
+      - awesome-task-manager
     environment:
       - NODE_ENV=development
     depends_on:
@@ -24,9 +24,15 @@ services:
 
   postgres:
     image: postgres:latest
+    networks:
+      - awesome-task-manager
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
       POSTGRES_DB: root
     ports:
       - "5432:5432"
+
+networks:
+  awesome-task-manager:
+    driver: bridge
