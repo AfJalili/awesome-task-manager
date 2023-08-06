@@ -1,20 +1,22 @@
 import { ConfigService } from '@nestjs/config';
 import { DatabaseConfig } from './types';
-import { TypeOrmModuleAsyncOptions } from '@nestjs/typeorm/dist/interfaces/typeorm-options.interface';
+import {
+  TypeOrmModuleAsyncOptions,
+  TypeOrmModuleOptions,
+} from '@nestjs/typeorm/dist/interfaces/typeorm-options.interface';
 
 export default {
   inject: [ConfigService],
-  userFactory: async (configService: ConfigService) => {
-    const dbConfig = configService.get<DatabaseConfig>('database');
+  useFactory: async (configService: ConfigService): Promise<TypeOrmModuleOptions> => {
+    const dbConfig = configService.get<DatabaseConfig>('gallatin.database');
     return {
-      type: dbConfig.type,
+      type: 'postgres',
       host: dbConfig.host,
-      port: dbConfig.port,
-      user: dbConfig.user,
+      port: Number(dbConfig.port),
+      username: dbConfig.user,
       password: dbConfig.password,
       database: dbConfig.database,
-      synchronize: false,
-      debug: false,
+      synchronize: true,
       autoLoadEntities: true,
     };
   },
